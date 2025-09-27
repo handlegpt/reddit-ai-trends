@@ -8,6 +8,9 @@ COPY . /app/
 # 安装依赖
 RUN pip install --no-cache-dir -r requirements.txt
 
+# 验证schedule模块安装
+RUN python -c "import schedule; print('schedule module installed successfully')"
+
 # 创建报告目录
 RUN mkdir -p reports
 
@@ -19,4 +22,4 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 ENV PYTHONUNBUFFERED=1
 
 # 运行报告生成脚本
-CMD ["python", "report_generation.py", "--schedule", "--interval", "24"]
+CMD ["python", "report_generation.py", "--interval", "24"]
